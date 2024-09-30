@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.Instant;
 import java.util.NoSuchElementException;
 
 @RestControllerAdvice
@@ -16,12 +17,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorMessage handleException(NoSuchElementException exception) {
-        return new ErrorMessage(exception.getMessage());
+        return new ErrorMessage(exception.getMessage(), Instant.now());
     }
 
     @ExceptionHandler
     @ResponseStatus
     public ErrorMessage handleAllExceptions(Exception exception) {
-        return new ErrorMessage(SOMETHING_WENT_WRONG_MESSAGE);
+        return new ErrorMessage(SOMETHING_WENT_WRONG_MESSAGE, Instant.now());
     }
 }
