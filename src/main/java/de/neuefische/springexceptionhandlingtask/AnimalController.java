@@ -4,6 +4,7 @@ import de.neuefische.springexceptionhandlingtask.dto.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.util.NoSuchElementException;
 
 @RestController
@@ -26,6 +27,6 @@ public class AnimalController {
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorMessage handleException(IllegalArgumentException exception) {
-        return new ErrorMessage(exception.getMessage());
+        return new ErrorMessage(exception.getMessage(), Instant.now());
     }
 }
